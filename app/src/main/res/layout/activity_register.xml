@@ -6,13 +6,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.todoreminder.viewmodel.SignupViewModel" />
+            type="com.example.todoreminder.viewmodel.RegisterViewModel" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.SignupFragment">
+        tools:context=".view.RegisterActivity">
 
         <ScrollView
             android:layout_width="match_parent"
