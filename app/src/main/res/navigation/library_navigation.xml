@@ -6,41 +6,28 @@
     app:startDestination="@id/itemHome">
 
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.example.todoreminder.view.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
-        <action
-            android:id="@+id/actionHome"
-            app:destination="@id/itemHome" />
-        <action
-            android:id="@+id/actionSignup"
-            app:destination="@id/signupFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/itemHome"
         android:name="com.example.todoreminder.view.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/actionLogin"
-            app:destination="@id/loginFragment" />
+            android:id="@+id/actionCreateTodo"
+            app:destination="@id/createTodoFragment" />
     </fragment>
     <fragment
-        android:id="@+id/signupFragment"
-        android:name="com.example.todoreminder.view.SignupFragment"
-        android:label="fragment_signup"
-        tools:layout="@layout/fragment_signup" >
-        <action
-            android:id="@+id/action_signupFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-    </fragment>
+        android:id="@+id/itemTask"
+        android:name="com.example.todoreminder.view.TaskFragment"
+        android:label="TaskFragment" />
     <fragment
-        android:id="@+id/accountFragment"
+        android:id="@+id/itemGallery"
+        android:name="com.example.todoreminder.view.GalleryFragment"
+        android:label="GalleryFragment" />
+    <fragment
+        android:id="@+id/itemAccount"
         android:name="com.example.todoreminder.view.AccountFragment"
         android:label="AccountFragment" />
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="com.example.todoreminder.view.MainActivity"
-        android:label="MainActivity" />
+    <fragment
+        android:id="@+id/createTodoFragment"
+        android:name="com.example.todoreminder.view.CreateTodoFragment"
+        android:label="CreateTodoFragment" />
 </navigation>

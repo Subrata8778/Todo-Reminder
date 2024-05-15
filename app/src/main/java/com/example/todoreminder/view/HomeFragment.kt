@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todoreminder.R
 import com.example.todoreminder.databinding.FragmentHomeBinding
@@ -28,7 +29,7 @@ class HomeFragment : Fragment() {
         binding.viewModel = viewModel
 
         setupRecyclerView()
-//        setupNavigation()
+        setupFab()
 
         viewModel.fetchTasks()
 
@@ -76,36 +77,10 @@ class HomeFragment : Fragment() {
         }
     }
 
-//    private fun setupNavigation() {
-//        val bottomNavigationView: BottomNavigationView = binding.bottomNavigationView
-//        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
-//            when (item.itemId) {
-//                R.id.navigation_home -> true
-//                R.id.navigation_dashboard -> {
-//                    // Navigate to DashboardFragment
-//                    true
-//                }
-//                R.id.navigation_notifications -> {
-//                    // Navigate to NotificationsFragment
-//                    true
-//                }
-//                else -> false
-//            }
-//        }
-//
-//        val navigationView: NavigationView = binding.navigationView
-//        navigationView.setNavigationItemSelectedListener { item ->
-//            when (item.itemId) {
-//                R.id.nav_profile -> {
-//                    // Navigate to ProfileFragment
-//                    true
-//                }
-//                R.id.nav_settings -> {
-//                    // Navigate to SettingsFragment
-//                    true
-//                }
-//                else -> false
-//            }
-//        }
-//    }
+    private fun setupFab() {
+        binding.fabAddTodo.setOnClickListener {
+            // Navigate to CreateTodoFragment
+            findNavController().navigate(R.id.actionCreateTodo)
+        }
+    }
 }

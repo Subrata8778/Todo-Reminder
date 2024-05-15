@@ -91,7 +91,7 @@
                 android:layout_marginTop="12dp"
                 android:background="#00FFFFFF"
                 android:onClick="@{() -> viewModel.onButtonRegister()}"
-                android:text="Daftar"
+                android:text="Register"
                 android:textColor="#2196F3"
                 app:layout_constraintStart_toEndOf="@+id/textView"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPassword" />
@@ -102,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="25dp"
-                android:text="Belum Punya Account?"
+                android:text="Belum Memiliki Account?"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPassword" />
 

@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.todoreminder.viewmodel.CreateTodoViewModel" />
+    </data>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,28 +21,6 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/inputLayoutNotes"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="12dp"
-                    android:hint="Enter Todo Description"
-                    app:hintAnimationEnabled="true"
-                    app:hintEnabled="true"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/inputLayoutTitle">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtDesc"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="={todo.notes}" />
-                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/txtJudulTodo"
@@ -67,20 +51,29 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/txtTitle"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="={todo.title}" />
+                        android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <Button
-                    android:id="@+id/btnAdd"
-                    android:layout_width="wrap_content"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inputLayoutNotes"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginEnd="32dp"
-                    android:onClick="s"
-                    android:text="ADD"
+                    android:layout_marginEnd="12dp"
+                    android:hint="Enter Todo Description"
+                    app:hintAnimationEnabled="true"
+                    app:hintEnabled="true"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/btnFile" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/inputLayoutTitle">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtDesc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/inputLayoutDate"
@@ -101,8 +94,29 @@
                         android:id="@+id/txtDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:enabled="true"
-                        android:onClick="s" />
+                        android:enabled="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inputLayoutTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="12dp"
+                    android:hint="Pick a Time"
+                    app:endIconDrawable="@drawable/baseline_access_time_24"
+                    app:endIconMode="custom"
+                    app:hintEnabled="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/inputLayoutDate">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="true" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
@@ -113,7 +127,7 @@
                     android:layout_marginTop="16dp"
                     android:text="Choose File"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/inputLayoutDate" />
+                    app:layout_constraintTop_toBottomOf="@+id/inputLayoutTime" />
 
                 <TextView
                     android:id="@+id/txtFilename"
@@ -123,7 +137,17 @@
                     android:layout_marginTop="30dp"
                     android:text="Contoh.jpg"
                     app:layout_constraintStart_toEndOf="@+id/btnFile"
-                    app:layout_constraintTop_toBottomOf="@+id/inputLayoutDate" />
+                    app:layout_constraintTop_toBottomOf="@+id/inputLayoutTime" />
+
+                <Button
+                    android:id="@+id/btnAdd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="32dp"
+                    android:text="ADD"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btnFile" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

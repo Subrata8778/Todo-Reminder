@@ -21,7 +21,7 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
     private var queue: RequestQueue = Volley.newRequestQueue(application)
 
     fun fetchTasks() {
-        val url = "http://YOUR_SERVER_IP/get_tasks.php"
+        val url = "http://192.168.1.14/JOB/Inovasi/get_todo.php"
         val stringRequest = StringRequest(Request.Method.GET, url,
             Response.Listener { response ->
                 val tasks = parseTasks(response)

@@ -13,6 +13,7 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.todoreminder.model.User
 import com.example.todoreminder.view.LoginActivity
+import com.example.todoreminder.view.RegisterActivity
 import org.json.JSONObject
 
 class RegisterViewModel(application: Application) : AndroidViewModel(application) {
@@ -24,7 +25,7 @@ class RegisterViewModel(application: Application) : AndroidViewModel(application
         user.value = User()
     }
     fun onButtonRegister() {
-        val url = "http://192.168.1.14/JOB/KasirPintar/register.php" // Ganti localhost dengan IP komputer Anda jika perlu
+        val url = "http://192.168.1.14/JOB/Inovasi/register.php" // Ganti localhost dengan IP komputer Anda jika perlu
         val stringRequest = object : StringRequest(Request.Method.POST, url,
             Response.Listener { response ->
                 Log.e("TAG", "Response: $response")
@@ -53,5 +54,10 @@ class RegisterViewModel(application: Application) : AndroidViewModel(application
             }
         }
         queue.add(stringRequest)
+    }
+    fun onButtonLogin() {
+        val intent = Intent(getApplication(), LoginActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        getApplication<Application>().startActivity(intent)
     }
 }
