@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.todoreminder.databinding.ItemTaskBinding
 import com.example.todoreminder.model.Task
 
-class TaskAdapter(var tasks: List<Task>) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
+class TaskAdapter(var tasks: List<Task>, private val onEditClick: (Task) -> Unit) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     class TaskViewHolder(val binding: ItemTaskBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -19,6 +19,10 @@ class TaskAdapter(var tasks: List<Task>) : RecyclerView.Adapter<TaskAdapter.Task
         val task = tasks[position]
         holder.binding.task = task
         holder.binding.executePendingBindings()
+
+        holder.binding.imgEdit.setOnClickListener {
+            onEditClick(task)
+        }
     }
 
     override fun getItemCount(): Int {

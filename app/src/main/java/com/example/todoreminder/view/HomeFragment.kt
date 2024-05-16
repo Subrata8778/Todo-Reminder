@@ -11,9 +11,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todoreminder.R
 import com.example.todoreminder.databinding.FragmentHomeBinding
+import com.example.todoreminder.model.Task
 import com.example.todoreminder.viewmodel.TaskViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationView
 
 class HomeFragment : Fragment() {
 
@@ -31,15 +30,18 @@ class HomeFragment : Fragment() {
         setupRecyclerView()
         setupFab()
 
-        viewModel.fetchTasks()
+        // Fetch tasks with different statuses
+        viewModel.fetchTasks("Todo", 3)
+        viewModel.fetchTasks("InProgress", 3)
+        viewModel.fetchTasks("Done", 3)
 
         return binding.root
     }
 
     private fun setupRecyclerView() {
-        val todoAdapter = TaskAdapter(emptyList())
-        val inProgressAdapter = TaskAdapter(emptyList())
-        val doneAdapter = TaskAdapter(emptyList())
+        val todoAdapter = TaskAdapter(emptyList()) { task -> navigateToUpdateTask(task) }
+        val inProgressAdapter = TaskAdapter(emptyList()) { task -> navigateToUpdateTask(task) }
+        val doneAdapter = TaskAdapter(emptyList()) { task -> navigateToUpdateTask(task) }
 
         binding.todoRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.inProgressRecyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -65,15 +67,15 @@ class HomeFragment : Fragment() {
         })
 
         binding.viewAllTodoButton.setOnClickListener {
-            // Navigate to TodoFragment
+            navigateToAllTasks("Todo")
         }
 
         binding.viewAllInProgressButton.setOnClickListener {
-            // Navigate to InProgressFragment
+            navigateToAllTasks("InProgress")
         }
 
         binding.viewAllDoneButton.setOnClickListener {
-            // Navigate to DoneFragment
+            navigateToAllTasks("Done")
         }
     }
 
@@ -82,5 +84,15 @@ class HomeFragment : Fragment() {
             // Navigate to CreateTodoFragment
             findNavController().navigate(R.id.actionCreateTodo)
         }
+    }
+
+    private fun navigateToAllTasks(status: String) {
+        val action = HomeFragmentDirections.actionAllTask(status)
+        findNavController().navigate(action)
+    }
+
+    private fun navigateToUpdateTask(task: Task) {
+        val action = HomeFragmentDirections.actionUpdateTask(task)
+        findNavController().navigate(action)
     }
 }

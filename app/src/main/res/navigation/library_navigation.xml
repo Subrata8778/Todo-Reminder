@@ -13,6 +13,17 @@
         <action
             android:id="@+id/actionCreateTodo"
             app:destination="@id/createTodoFragment" />
+        <action
+            android:id="@+id/actionAllTask"
+            app:destination="@id/allTaskFragment" />
+        <action
+            android:id="@+id/actionUpdateTask"
+            app:destination="@id/updateTaskFragment">
+        <argument
+            android:name="task"
+            app:argType="com.example.todoreminder.model.Task"
+            app:nullable="false" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/itemTask"
@@ -30,4 +41,16 @@
         android:id="@+id/createTodoFragment"
         android:name="com.example.todoreminder.view.CreateTodoFragment"
         android:label="CreateTodoFragment" />
+    <fragment
+        android:id="@+id/allTaskFragment"
+        android:name="com.example.todoreminder.view.AllTaskFragment"
+        android:label="AllTaskFragment">
+    <argument
+        android:name="status"
+        app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateTaskFragment"
+        android:name="com.example.todoreminder.view.UpdateTaskFragment"
+        android:label="UpdateTaskFragment" />
 </navigation>
