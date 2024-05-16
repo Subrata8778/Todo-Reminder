@@ -32,4 +32,9 @@ class TaskAdapter(
     }
 
     override fun getItemCount(): Int = tasks.size
+
+    fun updateTasks(newTasks: List<Task>) {
+        tasks = newTasks
+        notifyDataSetChanged()
+    }
 }

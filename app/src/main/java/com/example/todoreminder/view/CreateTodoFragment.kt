@@ -83,13 +83,13 @@ class CreateTodoFragment : Fragment(), DatePickerDialog.OnDateSetListener, TimeP
 
     private fun updateDateLabel() {
         val dateFormat = "yyyy-MM-dd"
-        val sdf = SimpleDateFormat(dateFormat, Locale.US)
+        val sdf = SimpleDateFormat(dateFormat, Locale.getDefault())
         binding.txtDate.setText(sdf.format(calendar.time))
     }
 
     private fun updateTimeLabel() {
         val timeFormat = "HH:mm"
-        val sdf = SimpleDateFormat(timeFormat, Locale.US)
+        val sdf = SimpleDateFormat(timeFormat, Locale.getDefault())
         binding.txtTime.setText(sdf.format(calendar.time))
     }
 
