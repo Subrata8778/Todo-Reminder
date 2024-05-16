@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.Navigation
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
@@ -94,7 +95,9 @@ class AccountViewModel(application: Application) : AndroidViewModel(application)
     private fun clearUserPreferences() {
         val sharedPreferences: SharedPreferences = getApplication<Application>().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-        editor.clear()
-        editor.apply()
+        editor?.putString("username","")
+        editor?.commit()
+//        editor.clear()
+//        editor.commit()
     }
 }

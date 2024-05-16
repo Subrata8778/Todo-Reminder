@@ -1,21 +1,22 @@
 package com.example.todoreminder.viewmodel
 
 import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.todoreminder.model.Task
-import kotlinx.coroutines.launch
 import org.json.JSONArray
+import org.json.JSONObject
 
 class TaskViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -29,10 +30,21 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
 
     val currentTask = MutableLiveData<Task>()
 
+    private val sharedPreferences: SharedPreferences = application.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+
     fun fetchTasks(status: String, limit: Int) {
-        val url = "http://192.168.1.14/JOB/Inovasi/getTodo.php?status=$status&limit=$limit"
+        val username = sharedPreferences.getString("username", null)
+        if (username == null) {
+            Toast.makeText(getApplication(), "No logged-in user", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val url = "http://192.168.1.14/JOB/Inovasi/getTodo.php?username=$username&status=$status&limit=$limit"
+        Log.d("TaskViewModel", "Request URL: $url")
+
         val stringRequest = StringRequest(Request.Method.GET, url,
             Response.Listener { response ->
+                Log.d("TaskViewModel", "Response: $response")
                 val tasks = parseTasks(response)
                 when (status) {
                     "Todo" -> todoTasks.value = tasks
@@ -44,6 +56,7 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
                 _tasksByDate.value = allTasks.groupBy { it.due.get()?.split(" ")!![0] }.values.toList()
             },
             Response.ErrorListener {
+                Log.e("TaskViewModel", "Failed to fetch tasks", it)
                 Toast.makeText(getApplication(), "Failed to fetch tasks", Toast.LENGTH_SHORT).show()
             })
         queue.add(stringRequest)
@@ -82,19 +95,23 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun parseTasks(response: String): List<Task> {
         val tasks = mutableListOf<Task>()
-        val jsonArray = JSONArray(response)
-        for (i in 0 until jsonArray.length()) {
-            val jsonObject = jsonArray.getJSONObject(i)
-            val task = Task(
-                id = jsonObject.getInt("id"),
-                username = jsonObject.getString("username"),
-                title = ObservableField(jsonObject.getString("title")),
-                description = ObservableField(jsonObject.getString("description")),
-                due = ObservableField(jsonObject.getString("due")),
-                status = jsonObject.getString("status"),
-                file = jsonObject.getString("file")
-            )
-            tasks.add(task)
+        try {
+            val jsonArray = JSONArray(response)
+            for (i in 0 until jsonArray.length()) {
+                val jsonObject = jsonArray.getJSONObject(i)
+                val task = Task(
+                    id = jsonObject.getInt("id"),
+                    username = jsonObject.getString("username"),
+                    title = ObservableField(jsonObject.getString("title")),
+                    description = ObservableField(jsonObject.getString("description")),
+                    due = ObservableField(jsonObject.getString("due")),
+                    status = jsonObject.getString("status"),
+                    file = jsonObject.getString("file")
+                )
+                tasks.add(task)
+            }
+        } catch (e: Exception) {
+            Log.e("TaskViewModel", "Error parsing tasks", e)
         }
         return tasks
     }
