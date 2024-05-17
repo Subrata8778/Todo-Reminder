@@ -110,9 +110,9 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
         val stringRequest = object : StringRequest(Request.Method.POST, url,
             Response.Listener { response ->
                 Log.e("TAG", "Response: $response")
-                fetchTasks("Todo", Int.MAX_VALUE)
-                fetchTasks("InProgress", Int.MAX_VALUE)
-                fetchTasks("Done", Int.MAX_VALUE)
+                fetchTasks("Todo", 3)
+                fetchTasks("InProgress", 3)
+                fetchTasks("Done", 3)
             },
             Response.ErrorListener {
                 Toast.makeText(getApplication(), "Failed to update task status", Toast.LENGTH_SHORT).show()
