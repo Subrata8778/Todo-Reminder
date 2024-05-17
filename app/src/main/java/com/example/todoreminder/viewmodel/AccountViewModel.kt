@@ -80,13 +80,9 @@ class AccountViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun logout() {
-        // Implementasi logika untuk logout, misalnya menghapus token autentikasi
         clearUserPreferences()
-
-        // Menampilkan pesan logout
         Toast.makeText(getApplication(), "Logged out", Toast.LENGTH_SHORT).show()
 
-        // Navigasi ke halaman login
         val intent = Intent(getApplication(), LoginActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         getApplication<Application>().startActivity(intent)

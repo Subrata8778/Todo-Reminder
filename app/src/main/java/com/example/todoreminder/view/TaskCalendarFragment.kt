@@ -66,7 +66,6 @@ class TaskCalendarFragment : Fragment() {
         _binding = null
     }
     private fun formatDateString(date: String): String {
-        // Expecting date in format YYYY-M-D
         val inputFormat = SimpleDateFormat("yyyy-M-d", Locale.getDefault())
         val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val parsedDate = inputFormat.parse(date)
